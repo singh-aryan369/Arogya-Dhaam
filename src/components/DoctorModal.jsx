@@ -12,18 +12,55 @@ export default function DoctorModal({ doctor, onClose }) {
   const reduced = useReducedMotion();
   const dialogRef = useRef(null);
   const closeBtnRef = useRef(null);
+  const onCloseRef = useRef(onClose);
+  onCloseRef.current = onClose;
 
   useEffect(() => {
-    const onKey = (e) => { if (e.key === 'Escape') onClose(); };
+    const onKey = (e) => { if (e.key === 'Escape') onCloseRef.current(); };
     document.addEventListener('keydown', onKey);
-    const prevOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
+
+    const scrollY = window.scrollY;
+    const html = document.documentElement;
+    const body = document.body;
+    const scrollbarComp = window.innerWidth - html.clientWidth;
+    const prev = {
+      htmlOverflow: html.style.overflow,
+      bodyOverflow: body.style.overflow,
+      bodyPosition: body.style.position,
+      bodyTop:      body.style.top,
+      bodyLeft:     body.style.left,
+      bodyRight:    body.style.right,
+      bodyWidth:    body.style.width,
+      bodyPadRight: body.style.paddingRight
+    };
+    html.style.overflow = 'hidden';
+    body.style.overflow = 'hidden';
+    body.style.position = 'fixed';
+    body.style.top = `-${scrollY}px`;
+    body.style.left = '0';
+    body.style.right = '0';
+    body.style.width = '100%';
+    if (scrollbarComp > 0) body.style.paddingRight = `${scrollbarComp}px`;
+
     closeBtnRef.current?.focus();
+
     return () => {
       document.removeEventListener('keydown', onKey);
-      document.body.style.overflow = prevOverflow;
+      html.style.overflow = prev.htmlOverflow;
+      body.style.overflow = prev.bodyOverflow;
+      body.style.position = prev.bodyPosition;
+      body.style.top      = prev.bodyTop;
+      body.style.left     = prev.bodyLeft;
+      body.style.right    = prev.bodyRight;
+      body.style.width    = prev.bodyWidth;
+      body.style.paddingRight = prev.bodyPadRight;
+      // Restore scroll synchronously, then again on next frame in case the
+      // unlock-triggered reflow snaps the viewport elsewhere.
+      window.scrollTo(0, scrollY);
+      requestAnimationFrame(() => window.scrollTo(0, scrollY));
     };
-  }, [onClose]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (!doctor) return null;
 
@@ -63,44 +100,46 @@ export default function DoctorModal({ doctor, onClose }) {
           <X size={20} aria-hidden="true" />
         </button>
 
-        <div className="doc-modal__head">
-          <div className="doc-modal__avatar" aria-hidden="true">{initials}</div>
-          <div className="doc-modal__head-text">
-            <p className="doc-modal__spec-tag">
-              <Stethoscope size={12} aria-hidden="true" /> {specialtyLabel}
-            </p>
-            <h2 id="doc-modal-title">{doctor.name}</h2>
-            <p className="doc-modal__role">{doctor.role}</p>
-            <p className="doc-modal__qual">{doctor.qualifications}</p>
+        <div className="doc-modal__scroll">
+          <div className="doc-modal__head">
+            <div className="doc-modal__avatar" aria-hidden="true">{initials}</div>
+            <div className="doc-modal__head-text">
+              <p className="doc-modal__spec-tag">
+                <Stethoscope size={12} aria-hidden="true" /> {specialtyLabel}
+              </p>
+              <h2 id="doc-modal-title">{doctor.name}</h2>
+              <p className="doc-modal__role">{doctor.role}</p>
+              <p className="doc-modal__qual">{doctor.qualifications}</p>
+            </div>
           </div>
-        </div>
 
-        <div className="doc-modal__body">
-          <p className="doc-modal__bio">{doctor.bio}</p>
+          <div className="doc-modal__body">
+            <p className="doc-modal__bio">{doctor.bio}</p>
 
-          <ul className="doc-modal__meta">
-            <li>
-              <span className="doc-modal__meta-icon" aria-hidden="true"><Award size={16} /></span>
-              <div>
-                <strong>{doctor.experience}+ years</strong>
-                <span>Senior consultant experience</span>
-              </div>
-            </li>
-            <li>
-              <span className="doc-modal__meta-icon" aria-hidden="true"><Clock3 size={16} /></span>
-              <div>
-                <strong>OPD timing</strong>
-                <span>{doctor.timing}</span>
-              </div>
-            </li>
-            <li>
-              <span className="doc-modal__meta-icon" aria-hidden="true"><Languages size={16} /></span>
-              <div>
-                <strong>Languages</strong>
-                <span>{doctor.languages.join(', ')}</span>
-              </div>
-            </li>
-          </ul>
+            <ul className="doc-modal__meta">
+              <li>
+                <span className="doc-modal__meta-icon" aria-hidden="true"><Award size={16} /></span>
+                <div>
+                  <strong>{doctor.experience}+ years</strong>
+                  <span>Senior consultant experience</span>
+                </div>
+              </li>
+              <li>
+                <span className="doc-modal__meta-icon" aria-hidden="true"><Clock3 size={16} /></span>
+                <div>
+                  <strong>OPD timing</strong>
+                  <span>{doctor.timing}</span>
+                </div>
+              </li>
+              <li>
+                <span className="doc-modal__meta-icon" aria-hidden="true"><Languages size={16} /></span>
+                <div>
+                  <strong>Languages</strong>
+                  <span>{doctor.languages.join(', ')}</span>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
 
         <div className="doc-modal__cta">

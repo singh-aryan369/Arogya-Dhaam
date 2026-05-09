@@ -8,19 +8,31 @@
   display: grid;
   place-items: center;
   padding: 24px;
-  overflow-y: auto;
+  overflow: hidden;
+  overscroll-behavior: contain;
 }
 
 .doc-modal {
   position: relative;
   width: min(560px, 100%);
+  max-height: calc(100dvh - 48px);
   max-height: calc(100vh - 48px);
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
   background: #fff;
   border-radius: var(--r-xl);
   box-shadow: 0 32px 80px rgba(15, 74, 69, 0.32), 0 8px 24px rgba(15, 74, 69, 0.18);
   padding: 0;
   isolation: isolate;
+  overflow: hidden;
+}
+
+.doc-modal__scroll {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  min-height: 0;
 }
 
 .doc-modal__close {
@@ -34,7 +46,7 @@
   color: var(--c-ink);
   display: grid;
   place-items: center;
-  z-index: 2;
+  z-index: 5;
   box-shadow: var(--sh-1);
   transition: background 160ms var(--ease), color 160ms var(--ease), transform 160ms var(--ease);
 }
@@ -152,6 +164,7 @@
   padding: 16px 32px;
   border-top: 1px solid var(--c-line);
   background: var(--c-surface-2);
+  flex-shrink: 0;
 }
 .doc-modal__cta .btn { flex: 1; justify-content: center; min-width: 200px; }
 .doc-modal__phone {
@@ -169,8 +182,10 @@
   color: var(--c-ink-3);
   text-align: center;
   margin: 0;
-  padding: 12px 32px 24px;
+  padding: 12px 32px 20px;
+  background: var(--c-surface-2);
   border-radius: 0 0 var(--r-xl) var(--r-xl);
+  flex-shrink: 0;
 }
 
 @media (max-width: 560px) {
