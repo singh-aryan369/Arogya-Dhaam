@@ -1,0 +1,28 @@
+.route-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 10001;
+  pointer-events: none;
+  background: transparent;
+  overflow: hidden;
+}
+.route-progress__bar {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--c-primary) 0%, var(--c-secondary) 60%, #5DDCC9 100%);
+  box-shadow: 0 0 12px rgba(46, 196, 182, 0.55);
+  border-radius: 0 3px 3px 0;
+  opacity: 0;
+  will-change: width, opacity;
+}
+.route-progress__bar--idle  { width: 0; opacity: 0; transition: opacity 200ms linear; }
+.route-progress__bar--start { width: 0; opacity: 1; }
+.route-progress__bar--grow  { width: 70%; opacity: 1; transition: width 360ms cubic-bezier(0.16, 1, 0.3, 1); }
+.route-progress__bar--finish{ width: 100%; opacity: 1; transition: width 240ms ease-out; }
+
+@media (prefers-reduced-motion: reduce) {
+  .route-progress__bar { transition: none !important; }
+}

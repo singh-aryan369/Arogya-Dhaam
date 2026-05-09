@@ -1,0 +1,92 @@
+.nf {
+  position: relative;
+  background: linear-gradient(180deg, var(--c-primary-soft) 0%, #fff 60%);
+  overflow: hidden;
+}
+.nf__inner {
+  display: grid;
+  gap: 56px;
+}
+.nf__hero {
+  text-align: center;
+  padding-top: 24px;
+}
+.nf__code {
+  font-family: var(--f-display);
+  font-size: clamp(5rem, 18vw, 9rem);
+  font-weight: 700;
+  line-height: 1;
+  margin: 12px 0 18px;
+  background: linear-gradient(135deg, var(--c-primary) 0%, var(--c-primary-dark) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: -0.04em;
+}
+.nf__lead {
+  font-size: 1.1rem;
+  max-width: 540px;
+  margin: 0 auto 32px;
+  color: var(--c-ink-2);
+}
+.nf__cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+.nf__quick { text-align: center; }
+.nf__quick h2 {
+  font-size: 1.4rem;
+  margin-bottom: 24px;
+  color: var(--c-ink);
+}
+.nf__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  text-align: left;
+}
+.nf__card-wrap { display: flex; }
+.nf__card-wrap > .nf__card { width: 100%; }
+.nf__card {
+  background: #fff;
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-lg);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: transform 240ms var(--ease), box-shadow 240ms var(--ease), border-color 240ms var(--ease);
+}
+.nf__card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--sh-3);
+  border-color: transparent;
+}
+.nf__card-icon {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  background: var(--c-primary-soft);
+  color: var(--c-primary);
+  display: grid;
+  place-items: center;
+  margin-bottom: 4px;
+}
+.nf__card h3 { font-size: 1.05rem; }
+.nf__card p { font-size: 0.9rem; color: var(--c-ink-3); flex: 1; }
+.nf__card-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--c-primary);
+  font-weight: 600;
+  font-size: 0.86rem;
+  margin-top: 4px;
+}
+.nf__card:hover .nf__card-more { gap: 8px; }
+
+@media (max-width: 800px) {
+  .nf__grid { grid-template-columns: 1fr; }
+}

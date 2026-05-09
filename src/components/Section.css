@@ -1,0 +1,14 @@
+.section__head {
+  max-width: 720px;
+  margin: 0 0 48px;
+}
+.section__head .eyebrow { margin-bottom: 12px; }
+.section__intro {
+  font-size: 1.1rem;
+  margin-top: 16px;
+  color: var(--c-ink-3);
+  max-width: 620px;
+}
+
+.section--center .section__head { margin-left: auto; margin-right: auto; text-align: center; }
+.section--center .section__intro { margin-left: auto; margin-right: auto; }
