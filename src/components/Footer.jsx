@@ -18,10 +18,10 @@ export default function Footer() {
             We bring a wealth of experience to heal and help you. Trusted multi-specialty care, expert doctors, and round-the-clock support.
           </p>
           <ul className="ftr__social" aria-label="Social media">
-            <li><a href="#" aria-label="Facebook"><Facebook size={16} aria-hidden="true" /></a></li>
-            <li><a href="#" aria-label="Twitter"><Twitter size={16} aria-hidden="true" /></a></li>
-            <li><a href="#" aria-label="Instagram"><Instagram size={16} aria-hidden="true" /></a></li>
-            <li><a href="#" aria-label="YouTube"><Youtube size={16} aria-hidden="true" /></a></li>
+            <li><span className="ftr__social-disabled" aria-label="Facebook (coming soon)" role="img"><Facebook size={16} aria-hidden="true" /></span></li>
+            <li><span className="ftr__social-disabled" aria-label="Twitter (coming soon)" role="img"><Twitter size={16} aria-hidden="true" /></span></li>
+            <li><span className="ftr__social-disabled" aria-label="Instagram (coming soon)" role="img"><Instagram size={16} aria-hidden="true" /></span></li>
+            <li><span className="ftr__social-disabled" aria-label="YouTube (coming soon)" role="img"><Youtube size={16} aria-hidden="true" /></span></li>
           </ul>
         </div>
 

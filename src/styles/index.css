@@ -11,25 +11,28 @@
   --c-primary-soft: #E8F8F6;
   --c-primary-soft-2: #C8EEE8;
   --c-secondary: #36B5C7;
-  --c-accent: #F5A623;
+  --c-accent: #C49A3F;
+  --c-accent-soft: #F7EFD9;
   --c-emergency: #E74C3C;
   --c-emergency-soft: #FDECEA;
   --c-success: #2EBD7B;
   --c-success-soft: #E2F7EE;
 
-  /* Neutrals */
-  --c-ink: #1B2B36;
-  --c-ink-2: #4A5A66;
-  --c-ink-3: #7B8A95;
-  --c-line: #E6ECEF;
-  --c-line-2: #CFD8DC;
-  --c-surface: #FFFFFF;
-  --c-surface-2: #F6FAFB;
-  --c-surface-3: #EDF4F5;
+  /* Neutrals — warm, not pure white (kinder on eyes per medical UI skill) */
+  --c-ink: #15232E;
+  --c-ink-2: #3D4A55;
+  --c-ink-3: #6B7A86;
+  --c-line: #E2E8EC;
+  --c-line-2: #C8D3D9;
+  --c-surface: #FCFBF8;        /* warm parchment, not pure #FFF */
+  --c-surface-2: #F4F8F7;      /* mint-tinted neutral */
+  --c-surface-3: #ECF3F2;
+  --c-card: #FFFFFF;           /* cards stay crisp white to pop on warm surface */
 
   /* Type */
   --f-sans: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-  --f-display: 'Poppins', 'Inter', system-ui, sans-serif;
+  --f-display: 'Fraunces', 'Source Serif Pro', Georgia, 'Times New Roman', serif;
+  --f-display-fallback: 'Poppins', 'Inter', system-ui, sans-serif;
 
   /* Radii */
   --r-sm: 8px;
@@ -73,19 +76,30 @@ a { color: inherit; text-decoration: none; }
 input, select, textarea { font: inherit; color: inherit; }
 ul { list-style: none; padding: 0; margin: 0; }
 
-/* Typography — Poppins for headings (matches Figma) */
+/* Typography — Fraunces (humanist serif) for display; Inter for body.
+   Conveys care, longevity, gravitas per medical-UI skill. */
 h1, h2, h3, h4 {
   font-family: var(--f-display);
   font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
   color: var(--c-ink);
   margin: 0;
 }
-h1 { font-size: clamp(2.25rem, 4.5vw, 3.5rem); font-weight: 700; line-height: 1.15; }
-h2 { font-size: clamp(1.75rem, 3vw, 2.4rem); }
-h3 { font-size: clamp(1.15rem, 1.6vw, 1.4rem); }
-h4 { font-size: 1.05rem; font-weight: 600; }
+h1 {
+  font-size: clamp(2.25rem, 4.5vw, 3.6rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+}
+h2 { font-size: clamp(1.75rem, 3vw, 2.5rem); letter-spacing: -0.02em; }
+h3 {
+  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+  font-family: var(--f-display-fallback);
+  font-weight: 600;
+  letter-spacing: -0.005em;
+}
+h4 { font-size: 1.0rem; font-weight: 600; font-family: var(--f-display-fallback); }
 p { margin: 0; color: var(--c-ink-2); }
 
 .eyebrow {
@@ -132,7 +146,18 @@ p { margin: 0; color: var(--c-ink-2); }
 
 .section { padding: clamp(56px, 7vw, 96px) 0; }
 .section-tight { padding: clamp(40px, 5vw, 72px) 0; }
-.section-alt { background: var(--c-surface-2); }
+.section-alt {
+  background: linear-gradient(180deg, var(--c-surface-2) 0%, var(--c-surface) 100%);
+  position: relative;
+}
+.section-alt::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 90% 0%, rgba(46, 196, 182, 0.06), transparent 50%);
+  pointer-events: none;
+}
+.section-alt > * { position: relative; }
 
 /* Buttons — pill-style matching Figma */
 .btn {
@@ -141,8 +166,8 @@ p { margin: 0; color: var(--c-ink-2); }
   gap: 10px;
   padding: 14px 26px;
   border-radius: var(--r-pill);
-  font-family: var(--f-display);
-  font-weight: 500;
+  font-family: var(--f-display-fallback);
+  font-weight: 600;
   font-size: 0.95rem;
   letter-spacing: 0.005em;
   transition: transform 200ms var(--ease), box-shadow 200ms var(--ease), background 200ms var(--ease), color 200ms var(--ease), border-color 200ms var(--ease);
@@ -188,7 +213,7 @@ p { margin: 0; color: var(--c-ink-2); }
 
 /* Cards */
 .card {
-  background: #fff;
+  background: var(--c-card);
   border: 1px solid var(--c-line);
   border-radius: var(--r-lg);
   padding: 28px;
@@ -197,7 +222,7 @@ p { margin: 0; color: var(--c-ink-2); }
 .card:hover {
   transform: translateY(-4px);
   box-shadow: var(--sh-3);
-  border-color: transparent;
+  border-color: var(--c-primary-soft-2);
 }
 
 .badge {

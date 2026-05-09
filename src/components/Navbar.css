@@ -42,8 +42,8 @@
   transition: background 200ms var(--ease);
 }
 .nav__brand-text {
-  font-family: var(--f-display);
-  font-size: 1.4rem;
+  font-family: var(--f-display-fallback);
+  font-size: 1.35rem;
   font-weight: 700;
   color: var(--c-ink);
   letter-spacing: -0.02em;
@@ -152,7 +152,7 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  font-family: var(--f-display);
+  font-family: var(--f-display-fallback);
   font-weight: 700;
   font-size: 1.1rem;
   color: var(--c-ink);
@@ -230,7 +230,7 @@
   min-width: 0;
 }
 .nav__drawer-text strong {
-  font-family: var(--f-display);
+  font-family: var(--f-display-fallback);
   font-weight: 600;
   font-size: 0.98rem;
   color: var(--c-ink);

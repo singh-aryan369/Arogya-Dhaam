@@ -28,7 +28,7 @@
 }
 .about-stats .stat { position: relative; }
 .about-stats .stat__num {
-  font-family: var(--f-display);
+  font-family: var(--f-display-fallback);
   font-size: clamp(2.4rem, 4.5vw, 3.4rem);
   font-weight: 700;
   line-height: 1;
@@ -84,9 +84,9 @@
   position: relative;
 }
 .timeline__year {
-  font-family: var(--f-display);
+  font-family: var(--f-display-fallback);
   font-size: 1.4rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--c-primary);
   position: relative;
   padding-right: 16px;

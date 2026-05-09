@@ -118,21 +118,21 @@ export default function DoctorModal({ doctor, onClose }) {
 
             <ul className="doc-modal__meta">
               <li>
-                <span className="doc-modal__meta-icon" aria-hidden="true"><Award size={16} /></span>
+                <span className="doc-modal__meta-icon" aria-hidden="true"><Award size={16} aria-hidden="true" /></span>
                 <div>
                   <strong>{doctor.experience}+ years</strong>
                   <span>Senior consultant experience</span>
                 </div>
               </li>
               <li>
-                <span className="doc-modal__meta-icon" aria-hidden="true"><Clock3 size={16} /></span>
+                <span className="doc-modal__meta-icon" aria-hidden="true"><Clock3 size={16} aria-hidden="true" /></span>
                 <div>
                   <strong>OPD timing</strong>
                   <span>{doctor.timing}</span>
                 </div>
               </li>
               <li>
-                <span className="doc-modal__meta-icon" aria-hidden="true"><Languages size={16} /></span>
+                <span className="doc-modal__meta-icon" aria-hidden="true"><Languages size={16} aria-hidden="true" /></span>
                 <div>
                   <strong>Languages</strong>
                   <span>{doctor.languages.join(', ')}</span>
